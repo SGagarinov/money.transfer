@@ -10,8 +10,18 @@ public class Card {
     private Short cvv;
     private String holderName;
     private String holderLastName;
+    private Double balance;
 
     public Card() {
+    }
+
+    public Card(String number, String date, Short cvv, String holderName, String holderLastName, Double balance) {
+        this.number = number;
+        this.date = date;
+        this.cvv = cvv;
+        this.holderName = holderName;
+        this.holderLastName = holderLastName;
+        this.balance = balance;
     }
 
     public String getNumber() {
@@ -52,5 +62,13 @@ public class Card {
 
     public void setHolderLastName(String holderLastName) {
         this.holderLastName = holderLastName;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 }
