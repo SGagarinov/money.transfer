@@ -37,7 +37,7 @@ public class LoggingServiceImpl implements LoggingService {
         builder.append(logInfo.getCardTo()).append(";");
         builder.append(logInfo.getSum()).append(";");
         builder.append(logInfo.getCommission()).append(";");
-        builder.append(logInfo.getResult()).append(";");
+        builder.append(logInfo.getResult()).append("\n");
         //Запись в файл
         writeToFile(builder.toString());
         //Вывод в консоль

@@ -1,0 +1,8 @@
+version: '1.0'
+
+services:
+  transferapp:
+    image: 'transfer:latest'
+    container_name: 'transfer'
+    ports:
+      - '8899:5500'
