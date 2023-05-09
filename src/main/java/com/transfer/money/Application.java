@@ -1,10 +1,12 @@
-package com.transfer.money.transfer;
+package com.transfer.money;
 
+import com.transfer.money.transfer.config.ServiceConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+@SpringBootApplication()
+@ComponentScan(basePackageClasses = ServiceConfig.class)
 public class Application {
 
 	public static void main(String[] args) {

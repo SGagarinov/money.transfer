@@ -1,4 +1,4 @@
-package domain.entity.confirm;
+package com.transfer.money.domain.entity.confirm;
 
 public class ConfirmProperties {
 

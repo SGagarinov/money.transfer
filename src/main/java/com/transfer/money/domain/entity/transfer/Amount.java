@@ -1,23 +1,23 @@
-package domain.entity.transfer;
+package com.transfer.money.domain.entity.transfer;
 
 public class Amount {
 
-    private Integer value;
+    private Long value;
     private String currency;
 
     public Amount() {
     }
 
-    public Amount(Integer value, String currency) {
+    public Amount(Long value, String currency) {
         this.value = value;
         this.currency = currency;
     }
 
-    public Integer getValue() {
+    public Long getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Long value) {
         this.value = value;
     }
 

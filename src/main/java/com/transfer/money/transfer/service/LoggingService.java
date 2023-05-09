@@ -1,7 +1,6 @@
 package com.transfer.money.transfer.service;
 
-import domain.entity.log.LogInfo;
-import org.springframework.stereotype.Service;
+import com.transfer.money.domain.entity.log.LogInfo;
 
 
 public interface LoggingService {

@@ -1,4 +1,4 @@
-package domain.entity.log;
+package com.transfer.money.domain.entity.log;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -7,11 +7,11 @@ public class LogInfo {
 
     private String cardFrom;
     private String cardTo;
-    private Double sum;
+    private Long sum;
     private Integer commission;
-    private String result;
+    private Boolean result;
 
-    public LogInfo(String cardFrom, String cardTo, Double sum, Integer commission, String result) {
+    public LogInfo(String cardFrom, String cardTo, Long sum, Integer commission, Boolean result) {
         this.cardFrom = cardFrom;
         this.cardTo = cardTo;
         this.sum = sum;
@@ -35,11 +35,11 @@ public class LogInfo {
         this.cardTo = cardTo;
     }
 
-    public Double getSum() {
+    public Long getSum() {
         return sum;
     }
 
-    public void setSum(Double sum) {
+    public void setSum(Long sum) {
         this.sum = sum;
     }
 
@@ -51,11 +51,11 @@ public class LogInfo {
         this.commission = commission;
     }
 
-    public String getResult() {
+    public Boolean getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(Boolean result) {
         this.result = result;
     }
 }

@@ -1,22 +1,23 @@
-package domain.entity.transfer;
+package com.transfer.money.domain.entity.transfer;
 
 
-public class TransferProperties {
+public class TransferInfo {
 
     private String cardFromNumber;
     private String cardFromValidTill;
     private Short cardFromCVV;
     private String cardToNumber;
+    private Amount amount;
 
-    public TransferProperties() {
-
+    public TransferInfo() {
     }
 
-    public TransferProperties(String cardFromNumber, String cardFromValidTill, Short cardFromCVV, String cardToNumber) {
+    public TransferInfo(String cardFromNumber, String cardFromValidTill, Short cardFromCVV, String cardToNumber, Amount amount) {
         this.cardFromNumber = cardFromNumber;
         this.cardFromValidTill = cardFromValidTill;
         this.cardFromCVV = cardFromCVV;
         this.cardToNumber = cardToNumber;
+        this.amount = amount;
     }
 
     public String getCardFromNumber() {
@@ -49,5 +50,13 @@ public class TransferProperties {
 
     public void setCardToNumber(String cardToNumber) {
         this.cardToNumber = cardToNumber;
+    }
+
+    public Amount getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Amount amount) {
+        this.amount = amount;
     }
 }

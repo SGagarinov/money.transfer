@@ -1,19 +1,17 @@
 package com.transfer.money.transfer.service;
 
-import domain.entity.log.LogInfo;
+import com.transfer.money.domain.entity.log.LogInfo;
 import org.springframework.stereotype.Service;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Service
 public class LoggingServiceImpl implements LoggingService {
 
-    private String file;
-    private String column;
+    private String file = "log.csv";
 
     LoggingServiceImpl() {
         StringBuilder builder = new StringBuilder();

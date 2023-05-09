@@ -1,8 +1,5 @@
-package domain.entity;
+package com.transfer.money.domain.entity;
 
-import jakarta.persistence.Entity;
-
-@Entity
 public class Card {
 
     private String number;
@@ -10,12 +7,12 @@ public class Card {
     private Short cvv;
     private String holderName;
     private String holderLastName;
-    private Double balance;
+    private Long balance;
 
     public Card() {
     }
 
-    public Card(String number, String date, Short cvv, String holderName, String holderLastName, Double balance) {
+    public Card(String number, String date, Short cvv, String holderName, String holderLastName, Long balance) {
         this.number = number;
         this.date = date;
         this.cvv = cvv;
@@ -64,11 +61,11 @@ public class Card {
         this.holderLastName = holderLastName;
     }
 
-    public Double getBalance() {
+    public Long getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(Long balance) {
         this.balance = balance;
     }
 }

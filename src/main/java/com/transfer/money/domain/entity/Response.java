@@ -1,4 +1,4 @@
-package domain.entity;
+package com.transfer.money.domain.entity;
 
 import java.util.UUID;
 
