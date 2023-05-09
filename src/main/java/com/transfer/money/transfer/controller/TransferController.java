@@ -33,4 +33,9 @@ public class TransferController {
         UUID result = transferService.confirm(confirmProperties);
         return new Response(result);
     }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello, it's me";
+    }
 }
