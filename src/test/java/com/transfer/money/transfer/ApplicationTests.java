@@ -1,9 +1,9 @@
 package com.transfer.money.transfer;
 
-import com.transfer.money.domain.entity.Response;
-import com.transfer.money.domain.entity.confirm.ConfirmProperties;
-import com.transfer.money.domain.entity.transfer.Amount;
-import com.transfer.money.domain.entity.transfer.TransferInfo;
+import com.transfer.money.entity.Response;
+import com.transfer.money.entity.confirm.ConfirmProperties;
+import com.transfer.money.entity.transfer.Amount;
+import com.transfer.money.entity.transfer.TransferInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
