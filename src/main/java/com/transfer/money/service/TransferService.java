@@ -1,10 +1,8 @@
 package com.transfer.money.service;
 
-import com.transfer.money.entity.Response;
-import com.transfer.money.entity.confirm.ConfirmProperties;
-import com.transfer.money.entity.transfer.TransferInfo;
-
-import java.util.UUID;
+import com.transfer.money.dto.Response;
+import com.transfer.money.dto.ConfirmProperties;
+import com.transfer.money.dto.TransferInfo;
 
 public interface TransferService {
 

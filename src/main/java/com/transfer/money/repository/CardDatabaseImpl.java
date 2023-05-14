@@ -1,15 +1,7 @@
 package com.transfer.money.repository;
 
-import com.transfer.money.entity.Response;
-import com.transfer.money.entity.log.LogInfo;
-import com.transfer.money.exception.*;
 import com.transfer.money.entity.Card;
-import com.transfer.money.entity.confirm.ConfirmProperties;
-import com.transfer.money.entity.transfer.Transaction;
-import com.transfer.money.entity.transfer.TransferInfo;
-import com.transfer.money.service.LoggingService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.transfer.money.entity.Transaction;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;

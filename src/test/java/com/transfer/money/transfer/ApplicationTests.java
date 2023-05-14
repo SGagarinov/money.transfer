@@ -1,9 +1,9 @@
 package com.transfer.money.transfer;
 
-import com.transfer.money.entity.Response;
-import com.transfer.money.entity.confirm.ConfirmProperties;
-import com.transfer.money.entity.transfer.Amount;
-import com.transfer.money.entity.transfer.TransferInfo;
+import com.transfer.money.dto.Response;
+import com.transfer.money.dto.ConfirmProperties;
+import com.transfer.money.dto.Amount;
+import com.transfer.money.dto.TransferInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,14 +53,12 @@ class ApplicationTests {
 		transferInfo.setAmount(new Amount(1000L, "USD"));
 
 		ResponseEntity<Response> transfer = restTemplate.postForEntity("http://localhost:" + port + "/transfer",  transferInfo, Response.class);
-		System.out.println(transfer.getBody().getOperationId());
-		assertNotNull(transfer.getBody().getOperationId());
+		System.out.println(transfer.getBody().operationId());
+		assertNotNull(transfer.getBody().operationId());
 
-		ConfirmProperties confirmProperties = new ConfirmProperties();
-		confirmProperties.setOperationId(transfer.getBody().getOperationId().toString());
-		confirmProperties.setCode("6324231");
+		ConfirmProperties confirmProperties = new ConfirmProperties(transfer.getBody().operationId().toString(), "6324231");
 		ResponseEntity<Response> confirm = restTemplate.postForEntity("http://localhost:" + port + "/confirmOperation",  confirmProperties, Response.class);
-		System.out.println(confirm.getBody().getOperationId());
-		assertNotNull(confirm.getBody().getOperationId());
+		System.out.println(confirm.getBody().operationId());
+		assertNotNull(confirm.getBody().operationId());
 	}
 }

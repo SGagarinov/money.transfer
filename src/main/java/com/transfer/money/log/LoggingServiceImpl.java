@@ -1,6 +1,6 @@
-package com.transfer.money.service;
+package com.transfer.money.log;
 
-import com.transfer.money.entity.log.LogInfo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.FileWriter;
@@ -11,6 +11,7 @@ import java.time.LocalTime;
 @Service
 public class LoggingServiceImpl implements LoggingService {
 
+    @Value("${ file:\"log.csv\" }")
     private String file = "log.csv";
 
     LoggingServiceImpl() {
@@ -27,17 +28,17 @@ public class LoggingServiceImpl implements LoggingService {
     }
 
     @Override
-    public void log(LogInfo logInfo) {
+    public synchronized void log(LogInfo logInfo) {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
         StringBuilder builder = new StringBuilder();
         builder.append(date).append(";");
         builder.append(time).append(";");
-        builder.append(logInfo.getCardFrom()).append(";");;
-        builder.append(logInfo.getCardTo()).append(";");
-        builder.append(logInfo.getSum()).append(";");
-        builder.append(logInfo.getCommission()).append(";");
-        builder.append(logInfo.getResult()).append("\n");
+        builder.append(logInfo.cardFrom()).append(";");;
+        builder.append(logInfo.cardTo()).append(";");
+        builder.append(logInfo.sum()).append(";");
+        builder.append(logInfo.commission()).append(";");
+        builder.append(logInfo.result()).append("\n");
         //Запись в файл
         writeToFile(builder.toString());
         //Вывод в консоль
@@ -57,10 +58,10 @@ public class LoggingServiceImpl implements LoggingService {
     private void view(LogInfo logInfo, LocalDate date, LocalTime time) {
         System.out.println("Date:" + date);
         System.out.println("Time:" + time);
-        System.out.println("CardFrom:" + logInfo.getCardFrom());
-        System.out.println("CardTo:" + logInfo.getCardTo());
-        System.out.println("Sum:" + logInfo.getSum());
-        System.out.println("Commission:" + logInfo.getCommission());
-        System.out.println("Result:" + logInfo.getResult());
+        System.out.println("CardFrom:" + logInfo.cardFrom());
+        System.out.println("CardTo:" + logInfo.cardTo());
+        System.out.println("Sum:" + logInfo.sum());
+        System.out.println("Commission:" + logInfo.commission());
+        System.out.println("Result:" + logInfo.result());
     }
 }

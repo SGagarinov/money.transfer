@@ -1,10 +1,9 @@
 package com.transfer.money.controller;
 
 import com.transfer.money.service.TransferService;
-import com.transfer.money.entity.Response;
-import com.transfer.money.entity.confirm.ConfirmProperties;
-import com.transfer.money.entity.transfer.TransferInfo;
-import org.springframework.http.HttpStatus;
+import com.transfer.money.dto.Response;
+import com.transfer.money.dto.ConfirmProperties;
+import com.transfer.money.dto.TransferInfo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,12 +19,12 @@ public class TransferController {
     @PostMapping("/transfer")
     public ResponseEntity<Response> transfer (@RequestBody TransferInfo info) throws Exception {
         Response result = transferService.transfer(info);
-        return new ResponseEntity<Response>(result, HttpStatus.OK);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/confirmOperation")
     public ResponseEntity<Response> confirm (@RequestBody ConfirmProperties confirmProperties) throws Exception {
         Response result = transferService.confirm(confirmProperties);
-        return new ResponseEntity<Response>(result, HttpStatus.OK);
+        return ResponseEntity.ok(result);
     }
 }

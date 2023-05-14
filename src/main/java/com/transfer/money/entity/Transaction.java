@@ -1,5 +1,6 @@
-package com.transfer.money.entity.transfer;
+package com.transfer.money.entity;
 
+import com.transfer.money.dto.TransferInfo;
 import com.transfer.money.entity.Card;
 
 public class Transaction {

@@ -1,10 +1,7 @@
 package com.transfer.money.repository;
 
 import com.transfer.money.entity.Card;
-import com.transfer.money.entity.Response;
-import com.transfer.money.entity.confirm.ConfirmProperties;
-import com.transfer.money.entity.transfer.Transaction;
-import com.transfer.money.entity.transfer.TransferInfo;
+import com.transfer.money.entity.Transaction;
 
 import java.util.UUID;
 

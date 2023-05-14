@@ -1,4 +1,4 @@
-package com.transfer.money.entity.transfer;
+package com.transfer.money.dto;
 
 
 public class TransferInfo {

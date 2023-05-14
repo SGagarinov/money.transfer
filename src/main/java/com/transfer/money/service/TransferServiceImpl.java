@@ -1,12 +1,13 @@
 package com.transfer.money.service;
 
 import com.transfer.money.entity.Card;
-import com.transfer.money.entity.Response;
-import com.transfer.money.entity.confirm.ConfirmProperties;
-import com.transfer.money.entity.log.LogInfo;
-import com.transfer.money.entity.transfer.Transaction;
-import com.transfer.money.entity.transfer.TransferInfo;
+import com.transfer.money.dto.Response;
+import com.transfer.money.dto.ConfirmProperties;
+import com.transfer.money.log.LogInfo;
+import com.transfer.money.entity.Transaction;
+import com.transfer.money.dto.TransferInfo;
 import com.transfer.money.exception.*;
+import com.transfer.money.log.LoggingService;
 import com.transfer.money.repository.CardDatabase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import java.util.UUID;
 public class TransferServiceImpl implements TransferService {
 
     @Value("${ commission:1 }")
-    public static final Short COMMISSION = 1;
+    public final Short COMMISSION = 1;
     private CardDatabase cardDatabase;
     private final LoggingService loggingService;
 
@@ -40,7 +41,7 @@ public class TransferServiceImpl implements TransferService {
         boolean check = checkCard(cardFrom, transferInfo.getCardFromValidTill(), transferInfo.getCardFromCVV());
         if (!check)
             throw new InvalidCardInfoException("Incorrect card data");
-        if (transferInfo.getAmount().getValue() > cardFrom.getBalance())
+        if (transferInfo.getAmount().value() > cardFrom.getBalance())
             throw new InsufficientFundsException("Insufficient funds");
 
         UUID uuid = UUID.randomUUID();
@@ -48,9 +49,8 @@ public class TransferServiceImpl implements TransferService {
         //Добавляем транзакцию
         cardDatabase.putTransaction(uuid, new Transaction(cardFrom, cardTo, transferInfo, false));
 
-        synchronized (loggingService) {
-            loggingService.log(new LogInfo(cardFrom.getNumber(), cardTo.getNumber(), transferInfo.getAmount().getValue(), 1, false));
-        }
+
+        loggingService.log(new LogInfo(cardFrom.getNumber(), cardTo.getNumber(), transferInfo.getAmount().value(), 1, false));
 
         //Возвращаем id
         return new Response(uuid);
@@ -59,11 +59,11 @@ public class TransferServiceImpl implements TransferService {
     @Override
     public Response confirm(ConfirmProperties confirmProperties) throws Exception {
         //Проверяем наличие кода
-        if (confirmProperties.getCode() == null || confirmProperties.getCode().isEmpty())
+        if (confirmProperties.code() == null || confirmProperties.code().isEmpty())
             throw new InvalidVerificationCodeException("Invalid verification code");
 
         //Ищем транзакцию
-        Transaction transaction = cardDatabase.getTransaction(UUID.fromString(confirmProperties.getOperationId()));
+        Transaction transaction = cardDatabase.getTransaction(UUID.fromString(confirmProperties.operationId()));
         if (transaction == null)
             throw new TransactionNotFoundException("Transaction not found");
 
@@ -76,15 +76,13 @@ public class TransferServiceImpl implements TransferService {
         TransferInfo transferInfo = transaction.getTransferInfo();
 
         //Перевод средств
-        Long value = (transferInfo.getAmount().getValue() / 100) * (100 - COMMISSION);
+        Long value = (transferInfo.getAmount().value() / 100) * (100 - COMMISSION);
 
-        cardFrom.setBalance(cardFrom.getBalance() - transferInfo.getAmount().getValue());
+        cardFrom.setBalance(cardFrom.getBalance() - transferInfo.getAmount().value());
         cardTo.setBalance(cardTo.getBalance() + value);
         transaction.setConfirm(true);
 
-        synchronized (loggingService) {
-            loggingService.log(new LogInfo(cardFrom.getNumber(), cardTo.getNumber(), transferInfo.getAmount().getValue(), 1, true));
-        }
+        loggingService.log(new LogInfo(cardFrom.getNumber(), cardTo.getNumber(), transferInfo.getAmount().value(), 1, true));
 
         return new Response(UUID.randomUUID());
     }
