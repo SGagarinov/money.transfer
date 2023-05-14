@@ -19,7 +19,7 @@ import java.util.UUID;
 public class TransferServiceImpl implements TransferService {
 
     @Value("${ commission:1 }")
-    public final Short COMMISSION = 1;
+    public Short COMMISSION;
     private CardDatabase cardDatabase;
     private final LoggingService loggingService;
 

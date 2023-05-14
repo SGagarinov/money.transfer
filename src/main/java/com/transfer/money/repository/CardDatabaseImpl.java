@@ -13,10 +13,6 @@ public class CardDatabaseImpl implements CardDatabase {
     ConcurrentHashMap<String, Card> cards = new ConcurrentHashMap<>();
     ConcurrentHashMap<UUID, Transaction> transactions = new ConcurrentHashMap<>();
 
-    public CardDatabaseImpl() {
-
-    }
-
     public void init() {
         cards.put("4960142027505908", new Card("4960142027505908", "10/27", (short)632, "Norimi", "Hsia", 500000L));
         cards.put("4960141276748052", new Card("4960141276748052", "12/30", (short)526, "Tefila", "Watts", 123000L));
@@ -25,7 +21,7 @@ public class CardDatabaseImpl implements CardDatabase {
     }
 
     @Override
-    public Card getCard(String cardNumber) throws Exception {
+    public Card getCard(String cardNumber) {
         //Возвращаем карту
         return cards.get(cardNumber);
     }
@@ -36,7 +32,7 @@ public class CardDatabaseImpl implements CardDatabase {
     }
 
     @Override
-    public Transaction getTransaction(UUID uuid) throws Exception {
+    public Transaction getTransaction(UUID uuid) {
         return transactions.get(uuid);
     }
 }

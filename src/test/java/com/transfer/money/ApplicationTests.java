@@ -1,9 +1,16 @@
-package com.transfer.money.transfer;
+package com.transfer.money;
 
 import com.transfer.money.dto.Response;
 import com.transfer.money.dto.ConfirmProperties;
 import com.transfer.money.dto.Amount;
 import com.transfer.money.dto.TransferInfo;
+import com.transfer.money.entity.Card;
+import com.transfer.money.entity.Transaction;
+import com.transfer.money.exception.CardNotFoundException;
+import com.transfer.money.exception.InsufficientFundsException;
+import com.transfer.money.exception.InvalidCardInfoException;
+import com.transfer.money.repository.CardDatabase;
+import com.transfer.money.service.TransferService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +21,9 @@ import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
@@ -24,6 +32,9 @@ class ApplicationTests {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
+	@Autowired
+	private TransferService transferService;
+
 	@Container
 	private GenericContainer<?> myTransfer = new GenericContainer<>("transfer:1.0")
 			.withExposedPorts(5500);
@@ -31,15 +42,6 @@ class ApplicationTests {
 	@BeforeEach
 	void setUp() {
 		myTransfer.start();
-	}
-
-	@Test
-	void contextLoads() {
-		String value = "Hello, it's me";
-		Integer port = myTransfer.getMappedPort(5500);
-		ResponseEntity<String> entityFirst = restTemplate.getForEntity("http://localhost:" + port + "/hello", String.class);
-		System.out.println(entityFirst.getBody());
-		assertEquals(value, entityFirst.getBody());
 	}
 
 	@Test

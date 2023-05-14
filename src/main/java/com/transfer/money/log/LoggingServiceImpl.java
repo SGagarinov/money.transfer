@@ -11,8 +11,8 @@ import java.time.LocalTime;
 @Service
 public class LoggingServiceImpl implements LoggingService {
 
-    @Value("${ file:\"log.csv\" }")
-    private String file = "log.csv";
+//    @Value("${ file:\"log.csv\" }")
+    private final String file = "log.csv";
 
     LoggingServiceImpl() {
         StringBuilder builder = new StringBuilder();

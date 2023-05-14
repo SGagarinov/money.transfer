@@ -6,9 +6,9 @@ import com.transfer.money.entity.Transaction;
 import java.util.UUID;
 
 public interface CardDatabase {
-    Card getCard(String cardNumber) throws Exception;
+    Card getCard(String cardNumber);
     Transaction putTransaction(UUID uuid, Transaction transaction);
-    Transaction getTransaction(UUID uuid) throws Exception;
+    Transaction getTransaction(UUID uuid);
 
     void init();
 }
